@@ -1,13 +1,13 @@
 
-f = open("log.txt", "r")
-a = f.readlines()
-b = []
+f = open("out", "r")
+data = f.readlines()
+w = open("trace", "w")
 
-for i in a:
-	for j in i.split():
-		b.append(j)
-
-f = open("trace.txt", "w")
-for i in b:
-	if '0x7f' in i:
-		f.write(i + '\n')
+for i in data:
+    for j in i.split():
+        if '0x4' in j:
+            try:
+                int(j.strip(':'), 16)
+            except:
+                continue
+            w.write(j.strip(':') + '\n')
