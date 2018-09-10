@@ -1,0 +1,15 @@
+define func
+    b *0x1000026a0
+    b _qsort
+    r
+    while $rip != 0x100002FA2
+        if $rip >= 0x7fff8909451c && $rip <= 0x7fff89094e59
+            si
+            x/i $rip
+            else
+            c
+        end
+    end
+end
+echo "Save the output to log.txt"
+echo "You can also save the output using the logging option in GDB"
