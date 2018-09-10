@@ -1,10 +1,10 @@
 # Differential Debugging
 
-I tried to find the sorting algorithms used in ls command in linux and Mac OS by reverse engineering it. While trying it, I learnt about differential debugging. That was a while back, I was doing it just for fun. I might publish a detailed blog on the same sometime later. This method is really useful when debugging large binaries.
+I tried to find the sorting algorithms used in `ls` command in linux and Mac OS by reverse engineering it. While trying it, I learnt about differential debugging. That was a while back, I was doing it just for fun. I might publish a detailed blog on the same sometime later. This method is really useful when debugging large binaries.
 
 Briefly there are two steps in differential debugging. The first one is to get a trace of the instructions being executed and the second step is to mark the same instructions in the disassembly. This enables you to focus on the only parts required.
 
-Since we only need the instruction trace, I wrote a small GDB script. You can use tools like PIN or r2 as well to get the same.
+Since we only need the instruction trace, I wrote a small GDB script. You can use tools like PIN or r2 as well to get the same. Put a breakpoint at start address i.e. the address from which you want to start the trace. Run a loop till the end address, single stepping each instruction. The output will be logged into the file out.
 
 ```
 define func
@@ -21,7 +21,7 @@ define func
 end
 ```
 
-After that, I used python to get only the addresses of the instructions from the log.
+After that, I used python to get only the addresses of the instructions from the log file. I wrote a for loop for saving only the addresses into another file named trace.
 
 ```
 f = open("out", "r")
@@ -39,7 +39,7 @@ for i in data:
 
 ```
 
-In the end, exported those addresses to IDA using IDAPython and colored the instructions executed.
+In the end, exported those addresses to IDA using the following IDAPython script and colored the instructions executed.
 
 ```
 f = open("trace", "r")
@@ -50,6 +50,7 @@ for i in addr:
 
 ```
 
-Done. Now, I only need to focus on the colored instructions in the disassembly.
+Done. Now, I only need to focus on the colored instructions in the disassembly. The CFG will look something like the following image.
+[CFG](https://github.com/r00tus3r/Differential_Debugging/blob/master/CFG.PNG)
 
 I hope this helps!
