@@ -51,6 +51,6 @@ for i in addr:
 ```
 
 Done. Now, I only need to focus on the colored instructions in the disassembly. The CFG will look something like the following image.
-![CFG](https://github.com/r00tus3r/Differential_Debugging/blob/master/CFG.PNG)
+[[https://github.com/r00tus3r/Differential_Debugging/blob/master/CFG.PNG]]
 
 I hope this helps!
