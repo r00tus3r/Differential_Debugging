@@ -35,7 +35,7 @@ for i in data:
                 int(j.strip(':'), 16)
             except:
                 continue
-            w.write(j.strip(':') + '\n')
+            w.write(j.strip(':') + '\r\n')
 
 ```
 
